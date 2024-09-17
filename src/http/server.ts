@@ -15,14 +15,13 @@ const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.register(fastifyCors, {
   origin: '*',
 })
+app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler)
 
 app.register(CreateGoalRoute)
 app.register(CreateGoalCompletionsRoute)
 app.register(GetPendingGoalsRoute)
 app.register(getWeekSummeringRoute)
-
-app.setValidatorCompiler(validatorCompiler)
-app.setSerializerCompiler(serializerCompiler)
 
 app
   .listen({
